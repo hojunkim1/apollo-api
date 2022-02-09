@@ -1,8 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
+import Movie from "../components/Movie";
 import styles from "../styles/Home.module.css";
 
 const GET_MOVIES = gql`
-  query {
+  query getMovies {
     movies {
       id
       title
@@ -30,10 +31,12 @@ const Home = () => {
     return (
       <div className={styles.moviesWrapper}>
         {data.movies.map((movie) => (
-          <div key={movie.id} className={styles.movie}>
-            <img src={movie.medium_cover_image} alt={movie.title} />
-            <h3>{movie.title}</h3>
-          </div>
+          <Movie
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            poster={movie.medium_cover_image}
+          />
         ))}
       </div>
     );
