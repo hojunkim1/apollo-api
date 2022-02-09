@@ -1,0 +1,29 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.moviesWrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 38px;
+}
+
+.movie {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie > h3 {
+  font-size: 28px;
+  font-weight: 600;
+}
