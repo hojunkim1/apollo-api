@@ -15,12 +15,12 @@ const Title = styled.h3`
 
 const Movie = ({ id, title, poster }) => {
   return (
-    <Link to={`${id}`}>
-      <Wrapper key={id}>
+    <Wrapper key={id}>
+      <Link to={`${id}`}>
         <img src={poster} alt={title} />
         <Title>{title}</Title>
-      </Wrapper>
-    </Link>
+      </Link>
+    </Wrapper>
   );
 };
 
