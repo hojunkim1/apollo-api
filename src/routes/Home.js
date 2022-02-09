@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
+import styled from "styled-components";
 import Movie from "../components/Movie";
-import styles from "../styles/Home.module.css";
+import NowFetch from "../components/NowFetch";
 
 const GET_MOVIES = gql`
   query getMovies {
@@ -12,34 +13,33 @@ const GET_MOVIES = gql`
   }
 `;
 
+const MoviesWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 38px;
+`;
+
 const Home = () => {
   const { loading, error, data } = useQuery(GET_MOVIES);
 
-  if (loading)
-    return (
-      <div className={styles.wrapper}>
-        <h1 className={styles.message}>Loading...</h1>
-      </div>
-    );
-  if (error)
-    return (
-      <div className={styles.wrapper}>
-        <h1 className={styles.message}>Error :(</h1>
-      </div>
-    );
-  if (data)
-    return (
-      <div className={styles.moviesWrapper}>
-        {data.movies.map((movie) => (
-          <Movie
-            key={movie.id}
-            id={movie.id}
-            title={movie.title}
-            poster={movie.medium_cover_image}
-          />
-        ))}
-      </div>
-    );
+  return (
+    <>
+      {!data ? (
+        <NowFetch loading={loading} error={error} />
+      ) : (
+        <MoviesWrapper>
+          {data.movies.map((movie) => (
+            <Movie
+              key={movie.id}
+              id={movie.id}
+              title={movie.title}
+              poster={movie.medium_cover_image}
+            />
+          ))}
+        </MoviesWrapper>
+      )}
+    </>
+  );
 };
 
 export default Home;

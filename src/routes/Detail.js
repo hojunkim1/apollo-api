@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import styles from "../styles/Detail.module.css";
+
+import NowFetch from "../components/NowFetch";
 
 const GET_MOVIE = gql`
   query getMovie($id: Int!) {
@@ -18,19 +19,15 @@ const Detail = () => {
     variables: { id: +id },
   });
 
-  if (loading)
-    return (
-      <div className={styles.wrapper}>
-        <h1 className={styles.message}>Loading...</h1>
-      </div>
-    );
-  if (error)
-    return (
-      <div className={styles.wrapper}>
-        <h1 className={styles.message}>Error :(</h1>
-      </div>
-    );
-  if (data) return <div>{data.movie.title}</div>;
+  return (
+    <>
+      {!data ? (
+        <NowFetch loading={loading} error={error} />
+      ) : (
+        <div>{data.movie.title}</div>
+      )}
+    </>
+  );
 };
 
 export default Detail;

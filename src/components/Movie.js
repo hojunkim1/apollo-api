@@ -1,13 +1,25 @@
 import { Link } from "react-router-dom";
-import styles from "../styles/Movie.module.css";
+import styled from "styled-components";
+
+const Wrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Title = styled.h3`
+  font-size: 28px;
+  font-weight: 600;
+`;
 
 const Movie = ({ id, title, poster }) => {
   return (
     <Link to={`${id}`}>
-      <div key={id} className={styles.movie}>
+      <Wrapper key={id}>
         <img src={poster} alt={title} />
-        <h3>{title}</h3>
-      </div>
+        <Title>{title}</Title>
+      </Wrapper>
     </Link>
   );
 };
